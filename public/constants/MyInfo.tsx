@@ -1,0 +1,75 @@
+export default {
+  name: "Bon Huang",
+  educations: [
+    {
+      degree: "Master",
+      major: "Astronomy",
+      university: "University of Hawaii at Manoa",
+      universityLink: "https://manoa.hawaii.edu/",
+      duration: "2011-2013",
+    },
+    {
+      degree: "BS",
+      major: "Astrophysics",
+      university: "University of California, Los Angeles",
+      universityLink: "https://www.ucla.edu/",
+      duration: "2009-2011",
+    },
+  ],
+  contacts: [
+    {
+      platform: "linkedin",
+      link: "https://www.linkedin.com/in/bon-huang/",
+      value: "linkedin.com/in/bon-huang/",
+    },
+    {
+      platform: "github",
+      link: "https://github.com/yellowbang",
+      value: "dgithub.com/yellowbang",
+    },
+    { platform: "email", value: "astrotabon@gmail.com" },
+  ],
+  experiences: [
+    {
+      title: "Sr. Software Engineer",
+      companyName: "Bolster",
+      companyLink: "https://bolster.ai/",
+      address: "Los Altos",
+      duration: "Jan 2020-present",
+      skills: [
+        "React",
+        "TypeScript",
+        "NodeJS",
+        "EJS",
+        "NestJS",
+        "MySQL",
+        "PostgressSQL",
+      ],
+      achievements: ["aa", "aa", "aa"],
+    },
+    {
+      title: "Junior to Sr. Software Engineer",
+      companyName: "Cisco",
+      address: "San Jose",
+      duration: "Jun 2014 - Jan 2020",
+      skills: ["React"],
+      achievements: ["bb", "bb", "bb", "bb"],
+    },
+    {
+      title: "Software Engineer",
+      companyName: "Colabeo",
+      address: "San Francisco",
+      duration: "Nov - 2013 - Jun 2014",
+      skills: ["Javascript"],
+      achievements: [],
+    },
+    {
+      title: "Research Assistant",
+      companyName: "University of Hawaii at Manoa",
+      address: "Hawaii",
+      duration: "2011-2013",
+      skills: ["Python"],
+      achievements: [],
+    },
+  ],
+};
