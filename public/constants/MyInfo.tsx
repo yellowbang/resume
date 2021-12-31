@@ -39,29 +39,41 @@ export default {
       skills: [
         "React",
         "TypeScript",
+        "SASS",
         "NodeJS",
         "EJS",
+        "SEO",
         "NestJS",
+        "TypeORM",
         "MySQL",
         "PostgressSQL",
+        "Chrome Extension",
       ],
-      achievements: ["aa", "aa", "aa"],
+      achievements: [
+        "Designed and built three web apps (two for customers and one for internal) from scratch with React as frontend framework.",
+        "Rewrite company main website. Make it responsive and add SEO related content so that it becomes the 1st place in google search.",
+        "Created API for data fetching and write script (with typeORM) for deploying production data.",
+        "Fast response for hotfixes. Always check slack even when I am on PTO or holiday.",
+      ],
     },
     {
       title: "Junior to Sr. Software Engineer",
       companyName: "Cisco",
       address: "San Jose",
       duration: "Jun 2014 - Jan 2020",
-      skills: ["React"],
-      achievements: ["bb", "bb", "bb", "bb"],
+      skills: ["React", "Redux", "NodeJS", "ExtJS"],
+      achievements: [
+        "Development of complex frontend web page which is for customers (large company like Disney) making complex networking configuration.",
+        "Collaborated with backend engineers and marketing team to develop extension apps from draft.",
+        "Mentor new employees so that they can quick catch up and start making contributions.",
+      ],
     },
     {
       title: "Software Engineer",
       companyName: "Colabeo",
       address: "San Francisco",
       duration: "Nov - 2013 - Jun 2014",
-      skills: ["Javascript"],
-      achievements: [],
+      skills: ["Famous", "Javascript", "React"],
     },
     {
       title: "Research Assistant",
@@ -69,7 +81,25 @@ export default {
       address: "Hawaii",
       duration: "2011-2013",
       skills: ["Python"],
-      achievements: [],
+    },
+  ],
+  otherSkills: ["React Native", "Google Firebase", "WXML"],
+  others: [
+    {
+      title: "Yuehuashuo",
+      description:
+        "It is a Weixin mini app. We provide a platform for users to order flowers to lovers, family, friends and others.",
+    },
+    {
+      title: "Werewolf",
+      link: "https://game-0823.web.app/",
+      description:
+        "It is a simple website helps players to shuffle the characters roles for a board game called Werewolf",
+    },
+    {
+      title: "Our Memories",
+      link: "https://beibixiaofei.herokuapp.com/",
+      description: "It is a website to make my wife happy.",
     },
   ],
 };

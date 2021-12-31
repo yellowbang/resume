@@ -5,6 +5,7 @@ import ExperienceItem from "../component/ExperienceItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/Home.module.css";
 import myInfo from "../public/constants/MyInfo";
+import OtherItem from "../component/OtherItem";
 
 const Home: NextPage = () => {
   return (
@@ -32,9 +33,17 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className={styles.experiences}>
-        <h2>Experiences</h2>
+        <h2>EXPERIENCES</h2>
         {myInfo.experiences.map((experience) => (
           <ExperienceItem {...experience} key={experience.companyName} />
+        ))}
+      </div>
+      <div className={styles.border} />
+      <div className={styles.others}>
+        <h2>SIDE PROJECTS AND HOBBIES</h2>
+        <div>Skills: {myInfo.otherSkills.join(" / ")}</div>
+        {myInfo.others.map((other) => (
+          <OtherItem {...other} key={other.title} />
         ))}
       </div>
     </div>

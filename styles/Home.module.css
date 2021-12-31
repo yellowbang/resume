@@ -9,3 +9,9 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #cdcdcd;
 }
+
+.border {
+  width: 100%;
+  border-bottom: 1px solid #cdcdcd;
+  margin-bottom: 20px;
+}

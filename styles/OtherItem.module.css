@@ -1,0 +1,8 @@
+.otherItem + .otherItem {
+  padding-top: 10px;
+}
+
+.otherItem .description {
+  padding-left: 10px;
+  color: #888;
+}

@@ -4,8 +4,8 @@ interface IExperienceItem {
   companyName: string;
   companyLink?: string;
   address: string;
-  skills: string[];
-  achievements: string[];
+  skills?: string[];
+  achievements?: string[];
 }
 
 export default function ExperienceItem(props: IExperienceItem) {
@@ -32,13 +32,14 @@ export default function ExperienceItem(props: IExperienceItem) {
           <span className="secondary-font">{duration}</span>
         </h3>
       </div>
-      <div className="skills">Skills: {skills.join(" / ")}</div>
+      {skills && <div className="skills">Skills: {skills.join(" / ")}</div>}
       <ul className="achievements-list">
-        {achievements.map((achievement: string) => {
-          <li className="achievement-item" key={achievement}>
-            {achievement}
-          </li>;
-        })}
+        {achievements &&
+          achievements.map((achievement: string) => (
+            <li className="achievement-item" key={achievement}>
+              {achievement}
+            </li>
+          ))}
       </ul>
     </div>
   );
