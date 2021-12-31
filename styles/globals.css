@@ -9,28 +9,12 @@ body {
   min-width: fit-content;
   justify-content: center;
 }
-
-h2 {
-  margin-bottom: 20px !important;
-}
 a {
   text-decoration: none !important;
 }
 
 * {
   box-sizing: border-box;
-}
-
-.d-flex {
-  display: flex !important;
-}
-
-.align-items-center {
-  align-items: center !important;
-}
-
-.justify-content-center {
-  justify-content: center !important;
 }
 
 .icon {

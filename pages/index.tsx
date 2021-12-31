@@ -10,23 +10,23 @@ import OtherItem from "../component/OtherItem";
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <div className="about-me d-flex flex-row align-items-center">
+      <div className={`${styles.infos} d-flex flex-sm-row align-items-center`}>
         <div className={styles.education}>
-          <h1 className="name">{myInfo.name}</h1>
+          <h1>{myInfo.name}</h1>
           <div className="d-flex align-items-start">
             <img
               className={"icon"}
               src="../icons/graduate.svg"
               alt="graduate"
             />
-            <div className="universities">
+            <div>
               {myInfo.educations.map((education) => (
                 <EducationItem {...education} key={education.university} />
               ))}
             </div>
           </div>
         </div>
-        <div className="contacts">
+        <div className={`${styles.contacts} pb-sm-0 mb-sm-0`}>
           {myInfo.contacts.map((contact) => (
             <ContactItem {...contact} key={contact.platform} />
           ))}
@@ -41,10 +41,16 @@ const Home: NextPage = () => {
       <div className={styles.border} />
       <div className={styles.others}>
         <h2>SIDE PROJECTS AND HOBBIES</h2>
-        <div>Skills: {myInfo.otherSkills.join(" / ")}</div>
-        {myInfo.others.map((other) => (
-          <OtherItem {...other} key={other.title} />
-        ))}
+        <div className="pb-2">
+          <i>Skills: {myInfo.otherSkills.join(" / ")}</i>
+        </div>
+        <ul>
+          {myInfo.others.map((other) => (
+            <li key={other.title}>
+              <OtherItem {...other} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

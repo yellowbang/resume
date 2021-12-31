@@ -83,18 +83,24 @@ export default {
       skills: ["Python"],
     },
   ],
-  otherSkills: ["React Native", "Google Firebase", "WXML"],
+  otherSkills: ["React Native", "NextJS", "Google Firebase", "WXML"],
   others: [
     {
-      title: "Yuehuashuo",
-      description:
-        "It is a Weixin mini app. We provide a platform for users to order flowers to lovers, family, friends and others.",
+      title: "Resume",
+      link: "https://resume.yellowbonbon.com/",
+      description: "A web page of my most updated resume.",
     },
+
     {
       title: "Werewolf",
       link: "https://game-0823.web.app/",
       description:
         "It is a simple website helps players to shuffle the characters roles for a board game called Werewolf",
+    },
+    {
+      title: "Yuehuashuo",
+      description:
+        "It is a Weixin mini app. We provide a platform for users to order flowers to lovers, family, friends and others.",
     },
     {
       title: "Our Memories",

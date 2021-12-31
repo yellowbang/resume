@@ -32,7 +32,11 @@ export default function ExperienceItem(props: IExperienceItem) {
           <span className="secondary-font">{duration}</span>
         </h3>
       </div>
-      {skills && <div className="skills">Skills: {skills.join(" / ")}</div>}
+      {skills && (
+        <div className="skills pb-2">
+          <i>Skills: {skills.join(" / ")}</i>
+        </div>
+      )}
       <ul className="achievements-list">
         {achievements &&
           achievements.map((achievement: string) => (

@@ -10,20 +10,14 @@ export default function ContactItem(props: IContactItem) {
   const { platform, value = "", link = "" } = props;
   return (
     <div className={`${styles.contactItem} d-flex align-items-center`}>
-      <div className="platform">
+      <div>
         <img
           className={"icon"}
           src={`../icons/${platform}.svg`}
           alt={platform}
         ></img>
       </div>
-      {link ? (
-        <a className="value" href={value}>
-          {value}
-        </a>
-      ) : (
-        <div className="value">{value}</div>
-      )}
+      {link ? <a href={value}>{value}</a> : <div>{value}</div>}
     </div>
   );
 }
