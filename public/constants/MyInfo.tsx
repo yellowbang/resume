@@ -50,9 +50,9 @@ export default {
         "Chrome Extension",
       ],
       achievements: [
-        "Designed and built three web apps (two for customers and one for internal) from scratch with React as frontend framework.",
-        "Rewrite company main website. Make it responsive and add SEO related content so that it becomes the 1st place in google search.",
-        "Created API for data fetching and write script (with typeORM) for deploying production data.",
+        "Designed and built three web apps (two for customers and one for internal) from scratch with React as a frontend framework.",
+        "Rewrite company main website. Make it responsive and add SEO-related content so that it becomes the 1st place in google search.",
+        "Create API for data fetching, and write script (with typeORM) for deploying production data.",
         "Fast response for hotfixes. Always check slack even when I am on PTO or holiday.",
       ],
     },
@@ -63,9 +63,9 @@ export default {
       duration: "Jun 2014 - Jan 2020",
       skills: ["React", "Redux", "NodeJS", "ExtJS"],
       achievements: [
-        "Development of complex frontend web page which is for customers (large company like Disney) making complex networking configuration.",
+        "Development of complex frontend web page which is for customers (a large company like Disney) making complex networking configuration.",
         "Collaborated with backend engineers and marketing team to develop extension apps from draft.",
-        "Mentor new employees so that they can quick catch up and start making contributions.",
+        "Mentor new employees so that they can quickly catch up and start making contributions.",
       ],
     },
     {
