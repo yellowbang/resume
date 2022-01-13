@@ -57,8 +57,9 @@ export default {
       ],
     },
     {
-      title: "Junior to Sr. Software Engineer",
+      title: "Sr. Software Engineer",
       companyName: "Cisco",
+      companyLink: "https://www.cisco.com/",
       address: "San Jose",
       duration: "Jun 2014 - Jan 2020",
       skills: ["React", "Redux", "NodeJS", "ExtJS"],

@@ -9,6 +9,17 @@ body {
   min-width: fit-content;
   justify-content: center;
 }
+
+h2 {
+  font-size:large !important;
+}
+h3 {
+  font-size:larger !important;
+}
+h4 {
+  font-size:medium !important;
+}
+
 a {
   text-decoration: none !important;
 }

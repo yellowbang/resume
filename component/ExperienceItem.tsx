@@ -20,17 +20,19 @@ export default function ExperienceItem(props: IExperienceItem) {
   } = props;
   return (
     <div className="experience-item">
-      <div className="title--and-duration">
-        <h3 className="title">
-          {title + " "}
+      <div className="title-and-duration d-flex justify-content-between w-100">
+        <div className="d-flex flex-column align-items-start">
+          <h3 className="title">{title}</h3>
           {companyLink ? (
-            <a href={companyLink}>{companyName}</a>
+            <a href={companyLink}><h4>{companyName}</h4></a>
           ) : (
-            <span>{companyName}</span>
+            <h4>{companyName}</h4>
           )}
-          <span>{" " + address + " "}</span>
+        </div>
+        <div className="d-flex flex-column align-items-end">
           <span className="secondary-font">{duration}</span>
-        </h3>
+          <span>{" " + address + " "}</span>
+        </div>
       </div>
       {skills && (
         <div className="skills pb-2">
