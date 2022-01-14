@@ -12,7 +12,7 @@ export default function OtherItem(props: IOtherItem) {
     <div className={`${styles.otherItem} d-flex align-items-start`}>
       <h5>
         {link ? (
-          <a href="https://beibixiaofei.herokuapp.com/" title="beibi">
+          <a href={link} title={title} target="_blank">
             {title}
           </a>
         ) : (

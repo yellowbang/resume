@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Resume from "../component/Resume";
-import { ref, onValue } from "firebase/database";
+import { set, ref, onValue } from "firebase/database";
 import { db } from "../firebase";
+import Images from "../component/Images";
 
 const Home: NextPage = () => {
   const [page, setPage] = useState("");
@@ -16,9 +17,49 @@ const Home: NextPage = () => {
     }
   });
 
+  useEffect(() => {
+    const queryString = window.location.search;
+    if (queryString.indexOf('bon') === -1) {
+      return;
+    }
+    document.addEventListener(
+      "keyup",
+      (event) => {
+        const keyName = event.key;
+        set(ref(db, "page"), keyName);
+      },
+      false
+    );
+
+    return (()=>{
+      set(ref(db, "page"), "0");
+    })
+  }, []);
+
   switch (page) {
+    case "1":
+    case "checkphish": {
+      return (
+        <Images
+          images={["../images/checkphish1.png", "../images/checkphish2.png"]}
+        ></Images>
+      );
+    }
+    case "2":
     case "bolster": {
-      return <div>bolster</div>;
+      return (
+        <Images
+          images={["../images/platform1.png", "../images/platform2.png"]}
+        ></Images>
+      );
+    }
+    case "3":
+    case "takedown": {
+      return <Images images={["../images/takedown.png"]}></Images>;
+    }
+    case "4":
+    case "cisco": {
+      return <Images images={["../images/cisco.webp"]}></Images>;
     }
     default: {
       return <Resume />;
