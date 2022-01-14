@@ -17,7 +17,7 @@ export default function ContactItem(props: IContactItem) {
           alt={platform}
         ></img>
       </div>
-      {link ? <a href={value}>{value}</a> : <div>{value}</div>}
+      {link ? <a href={link} target="_blank">{value}</a> : <div>{value}</div>}
     </div>
   );
 }

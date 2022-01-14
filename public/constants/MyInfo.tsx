@@ -25,7 +25,7 @@ export default {
     {
       platform: "github",
       link: "https://github.com/yellowbang",
-      value: "dgithub.com/yellowbang",
+      value: "github.com/yellowbang",
     },
     { platform: "email", value: "astrotabon@gmail.com" },
   ],
