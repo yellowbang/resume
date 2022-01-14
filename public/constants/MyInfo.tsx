@@ -50,10 +50,13 @@ export default {
         "Chrome Extension",
       ],
       achievements: [
-        "Designed and built three web apps (two for customers and one for internal) from scratch with React as a frontend framework.",
-        "Rewrite company main website. Make it responsive and add SEO-related content so that it becomes the 1st place in google search.",
+        "Build a public web application to allow users to use it free. And have some base idea about us.",
+        "Designed and built an enterprise web application. It displays the data in charts and tables so that customers can understand how many phish/scam sites we have found and taken down for them.",
+        "Rewrite company main website. Make it responsive and add SEO-related content so that it becomes 1st place in google search.",
+        "Designed and built a web application for internal users.",
+        "Build a Chrome Extension to help our internal users to auto-fill some complex forms. It improves their efficiency by 1000%.",
         "Create API for data fetching, and write script (with typeORM) for deploying production data.",
-        "Fast response for hotfixes. Always check slack even when I am on PTO or holiday.",
+        "Fast response for hotfixes, or urgent requirements. I will get the pop-up high priority task done on the same day.",
       ],
     },
     {
