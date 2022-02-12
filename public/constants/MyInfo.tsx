@@ -27,7 +27,7 @@ export default {
       link: "https://github.com/yellowbang",
       value: "github.com/yellowbang",
     },
-    { platform: "email", value: "astrotabon@gmail.com" },
+    { platform: "email", value: "bonhuangcareer@gmail.com" },
   ],
   experiences: [
     {
@@ -78,6 +78,9 @@ export default {
       address: "San Francisco",
       duration: "Nov - 2013 - Jun 2014",
       skills: ["Famous", "Javascript", "React"],
+      achievements: [
+        "We build a library that allows a mobile talk to a computer. Using this library, I Build mobile applications which it could send requests to a connected computer.",
+      ],
     },
     {
       title: "Research Assistant",
