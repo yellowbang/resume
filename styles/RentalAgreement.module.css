@@ -1,0 +1,29 @@
+.rentalAgreement {
+  line-height: 2.1em;
+}
+.rentalAgreement ol {
+  counter-reset: item;
+  list-style-type: none;
+  padding-left: 0;
+}
+.rentalAgreement li {
+  padding-top: 20px;
+}
+
+.rentalAgreement li::before {
+  content: counters(item, ".") " ";
+  font-weight: bold;
+  counter-increment: item;
+}
+.rentalAgreement li.noCounter::before {
+  content: "";
+}
+
+.signatureItem + .signatureItem {
+  margin-top: 30px;
+}
+.signatureItemField{
+  flex: 1;
+  margin: 0 10px;
+  border-bottom: 1px solid #000;
+}

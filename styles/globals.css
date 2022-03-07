@@ -10,6 +10,10 @@ body {
   justify-content: center;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  display: inline;
+}
+
 h2 {
   font-size:large !important;
 }
@@ -28,6 +32,10 @@ a {
   box-sizing: border-box;
 }
 
+.a4-page {
+  width: 700px;
+}
+
 .icon {
   margin-right: 10px;
 }
@@ -35,4 +43,12 @@ a {
 .secondary-font {
   color: #888;
   font-size: smaller;
+}
+
+.ml-4{
+  margin-left: 20px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
 }
