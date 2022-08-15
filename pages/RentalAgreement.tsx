@@ -1,13 +1,13 @@
-import React from "react";
-import moment from "moment";
-import details from "../public/constants/TenantsTemplate";
+import React from 'react';
+import moment from 'moment';
+import details from '../public/constants/405';
 import {
   specialProvisions,
   generalProvisions,
-} from "../public/constants/Provisions";
-import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../styles/RentalAgreement.module.css";
-import { Table } from "react-bootstrap";
+} from '../public/constants/Provisions';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from '../styles/RentalAgreement.module.css';
+import { Table } from 'react-bootstrap';
 
 interface ISignatureItem {
   name: string;
@@ -50,15 +50,15 @@ const RentalAgreement = () => {
     deposit,
     moveInFee,
   } = details;
-  const today = moment().format("MM/DD/YYYY");
+  const today = moment().format('MM/DD/YYYY');
   return (
     <div className={`${styles.rentalAgreement} a4-page d-flex flex-column`}>
       <h1 className="title">Rental Agreement</h1>
-      <div className="d-flex align-items-center">
-        <span>Between: </span>
+      <div className="d-flex align-items-center pb-3">
+        <span className="px-1">Between:</span>
         <b>{landlord}</b>
-        <span> and </span>
-        <b>{tenants.map((t) => t.name).join(", ")}</b>
+        <span className="px-1">and</span>
+        <b>{tenants.map((t) => t.name).join(', ')}</b>
       </div>
       <h2>Summary</h2>
       <ul>
@@ -150,14 +150,14 @@ const RentalAgreement = () => {
               <h4>RENT</h4>
               <div>
                 Rent for the term hereof shall be payable on the 1st day of each
-                month of the term (Due Date), in equal installments of{" "}
+                month of the term (Due Date), in equal installments of
                 <b>{rent}</b>.
               </div>
             </li>
             <li>
               <h4>FORM OF RENT PAYMENTS</h4>
               <div>
-                All payments shall be made to Landlord without demand at
+                {`All payments shall be made to Landlord without demand at
                 Landlord's mailing address such that they can be received on or
                 before the Due Date. Landlord's acceptance of rent from a person
                 other than the namedTenant shall not be a waiver of any right
@@ -165,9 +165,9 @@ const RentalAgreement = () => {
                 Tenant.Upon Landlord's receipt of a cash rental payment,
                 Landlord shall provide a written receipt to Tenant and record
                 the payment date and amount in a record book. All rent payments
-                should be made via one of the following methods:{" "}
+                should be made via one of the following methods:`}
                 <b>
-                  Cash, Personal Check, Cashier's Check or Any (Vemo or Zelle).
+                  {`Cash, Personal Check, Cashier's Check or Any (Vemo or Zelle).`}
                 </b>
               </div>
             </li>
@@ -178,16 +178,18 @@ const RentalAgreement = () => {
                 with Landlord the following deposit amount(s): <b>{deposit}</b>
               </div>
             </li>
-            <li>
-              <h4>NONREFUNDABLE FEES</h4>
-              <div>
-                Upon the due execution of this Agreement, Tenant shall pay to
-                Landlord the following non-refundable fee(s):{" "}
-                <b>
-                  {moveInFee.description} {moveInFee.amount}
-                </b>
-              </div>
-            </li>
+            {moveInFee.description !== '' && moveInFee.amount !== 0 ? (
+              <li>
+                <h4>NONREFUNDABLE FEES</h4>
+                <div>
+                  Upon the due execution of this Agreement, Tenant shall pay to
+                  Landlord the following non-refundable fee(s):
+                  <b>
+                    {moveInFee.description} {moveInFee.amount}
+                  </b>
+                </div>
+              </li>
+            ) : null}
             <li>
               <h4>UTILITIES AND SERVICES</h4>
               <div>
@@ -241,11 +243,11 @@ const RentalAgreement = () => {
                     <tr>
                       <td>Snow Removal</td>
                       <td>N/A</td>
-                    </tr>{" "}
+                    </tr>
                     <tr>
                       <td>Lawn Care</td>
                       <td>Landlord</td>
-                    </tr>{" "}
+                    </tr>
                     <tr>
                       <td>HOA or Condo Dues</td>
                       <td>Landlord</td>
@@ -254,7 +256,7 @@ const RentalAgreement = () => {
                 </Table>
               </div>
               <div>
-                Tenant's obligation to pay the above named utilities shall
+                {`Tenant's obligation to pay the above named utilities shall
                 include any and all seasonal fees, late fees,installation or
                 connection fees and maintenance charges. Failure by Tenant to
                 comply with the above responsibility for utilities will
@@ -265,17 +267,17 @@ const RentalAgreement = () => {
                 utilities prior to the date of Agreement termination,which
                 results in the account being billed to Landlord, Tenant's
                 utilities will be paid and charged back toTenant as additional
-                rent.
+                rent.`}
               </div>
             </li>
             <li>
               <h4>SMOKING</h4>
               <div>
-                The Premises are designated as a property where smoking is{" "}
+                The Premises are designated as a property where smoking is
                 <b>Not Permitted.</b>
               </div>
               <div>
-                For the purposes of clarifying and restricting its use, the term
+                {`For the purposes of clarifying and restricting its use, the term
                 “Smoking” includes the use of cigarettes,pipes, cigars,
                 electronic vaporizing or aerosol devices, or other devices
                 intended for the inhalation of tobacco, marijuana, or similar
@@ -285,7 +287,7 @@ const RentalAgreement = () => {
                 costs for the cleaning or repairing of any damage caused by or
                 related to smoking,including but not limited to: deodorizing the
                 Premises, sealing and painting the walls and ceiling, and/or
-                repairing or replacing the carpet and pads.
+                repairing or replacing the carpet and pads.`}
               </div>
             </li>
 
@@ -295,7 +297,7 @@ const RentalAgreement = () => {
                 <div className="ml-4">
                   <input type="checkbox" />
                   <b>
-                    Required to buy and maintain renters or liability insurance.{" "}
+                    Required to buy and maintain renters or liability insurance.
                   </b>
                   Tenant shall provide Landlord with evidence of required
                   insurance prior to Tenant moving into Premises and upon
@@ -304,10 +306,10 @@ const RentalAgreement = () => {
                 <div className="ml-4">
                   <input type="checkbox" checked={true} onChange={() => {}} />
                   <b>Not required to buy renters or liability insurance, </b>
-                  however it is strongly recommended to protectTenant, Tenant's
+                  {`however it is strongly recommended to protectTenant, Tenant's
                   family, Tenant's invitees, and/or guests, and all personal
                   property on the Premises and/or in any common areas from any
-                  and all damages.
+                  and all damages.`}
                 </div>
               </div>
             </li>
