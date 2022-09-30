@@ -1,9 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import details from '../public/constants/405';
+import details from '../public/constants/401';
 import {
   specialProvisions,
   generalProvisions,
+  PLACEHOLDER,
 } from '../public/constants/Provisions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/RentalAgreement.module.css';
@@ -403,7 +404,7 @@ const RentalAgreement = () => {
           </div>
           <div>TENANT(S):</div>
           {tenants.map((t) => (
-            <SignatureItem key={t.name} name={t.name}></SignatureItem>
+            <SignatureItem key={t.name} name={t.name === PLACEHOLDER? '' : t.name}></SignatureItem>
           ))}
           <div className="mt-4">LANDLORD(S):</div>
           <SignatureItem name={landlord}></SignatureItem>

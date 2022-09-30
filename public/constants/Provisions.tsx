@@ -1,3 +1,4 @@
+export const PLACEHOLDER = '___________________';
 export const specialProvisions = [
   {
     title: "LATE RENT",
