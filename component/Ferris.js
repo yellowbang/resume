@@ -78,14 +78,15 @@ class Ferris extends Component {
                 x2={svgSize}
                 y2={svgSize}
                 strokeWidth={strokeWidth}
-                style={{ stroke: '#cecece' }}
                 fill="blue"
                 width="30px"
+                className={styles.SvgStroke}
               />
               <circle
                 cx={circlePosition}
                 cy={circlePosition}
                 r={circlePosition}
+                className={styles.SvgStroke}
                 fill="#dedede"
               />
             </svg>

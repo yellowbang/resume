@@ -27,8 +27,17 @@
   animation: spin-right var(--period) linear infinite;
 }
 
+@keyframes changing-shadow {
+  0%, 50% {
+    box-shadow: 0 0 40px #ff9cffff;
+  }
+  100% {
+    box-shadow: 0 0 40px #ff9cff00;
+  }
+}
+
 .picContainer {
-  animation: pic-spin infinite var(--period) linear;
+  animation: pic-spin infinite var(--period) linear, changing-shadow infinite 4s alternate-reverse;
   width: var(--pic-size);
   height: var(--pic-size);
   border-radius: var(--pic-size)/2;
@@ -38,7 +47,6 @@
   position: absolute;
   top: 0;
   overflow: hidden;
-  box-shadow: 0 0 30px #ff9cff;
   border-radius: 50%;
 }
 
@@ -84,6 +92,19 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+@keyframes changing-color {
+  from {
+    stroke: #dcccda;
+  }
+  to {
+    stroke: #ff9cff;
+  }
+}
+
+.SvgStroke {
+  animation: changing-color infinite 4s alternate-reverse;
 }
 
 .viewPicContainer {
