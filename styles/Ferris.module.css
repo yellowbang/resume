@@ -1,0 +1,185 @@
+.ferris {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.picsContainer {
+  z-index:2;
+  position: absolute;
+  top: calc(var(--box-size) * -0.5);
+  right: calc(var(--box-size) * -0.6);
+  color: #d8d800
+}
+
+.orbitContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vmin;
+  height: 100vmin;
+}
+
+.orbit {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  animation: spin-right var(--period) linear infinite;
+}
+
+.picContainer {
+  animation: pic-spin infinite var(--period) linear;
+  width: var(--pic-size);
+  height: var(--pic-size);
+  border-radius: var(--pic-size)/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  box-shadow: 0 0 30px #ff9cff;
+  border-radius: 50%;
+}
+
+.picContainer > div {
+  overflow: hidden;
+  width: var(--pic-div-size);
+  height: var(--pic-div-size);
+  border-radius: 50%;
+}
+.picContainer > div > .pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: scale-down;
+}
+
+.donutSegment {
+  cursor: pointer;
+}
+
+.audioContainer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 6;
+  opacity: 0.1;
+}
+
+.audioContainer:hover {
+  opacity: 0.8;
+}
+
+@keyframes pic-spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes spin-right {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.viewPicContainer {
+  z-index:2;
+  position: absolute;
+  top: 5vmin;
+  left: 5vmin;
+  width: var(--view-picContainer-width);
+  height: var(--view-picContainer-height);
+  padding: var(--view-pic-inner-padding);
+  background-color: #ededed;
+  box-shadow: 0 0 30px lightgray;
+  border-radius: 12px;
+}
+
+.viewPicContainer .viewPic {
+  margin-bottom: var(--view-pic-inner-padding) / 2;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.viewPicContainer .viewPicDescr {
+  height: var(--view-picContainer-height) - var(--view-pic-height) - var(--view-pic-inner-padding);
+  overflow-y: auto;
+  font-size: var(--view-pic-width) * 0.08;
+}
+
+.bigben {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  width: 40%;
+}
+/* ==============================================================================================
+SED Innovations
+https://sed.am
+https://mkrtchyan.ga
+================================================================================================= */
+@keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+  from {background-position:0 0;}
+  to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+  from {background-position:0 0;}
+  to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+  from {background-position:0 0;}
+  to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+  from {background-position: 0;}
+  to {background-position:10000px 0;}
+}
+
+.stars, .twinkling, .clouds {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.stars {
+  background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+  z-index:0;
+}
+
+.twinkling{
+  background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+  z-index:1;
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
