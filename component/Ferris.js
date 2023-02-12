@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { Component } from 'react';
 import styles from '../styles/Ferris.module.css';
 
@@ -143,6 +142,14 @@ class Ferris extends Component {
           src={'/images/Amit/big-ben.webp'}
           alt={'pic'}
         />
+        {music.length ? (
+          <audio
+            className={styles.audio}
+            src={this.props.music[0]}
+            controls
+            autoPlay
+          />
+        ) : null}
       </div>
     );
   }

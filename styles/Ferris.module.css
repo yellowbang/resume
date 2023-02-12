@@ -40,7 +40,6 @@
   animation: pic-spin infinite var(--period) linear, changing-shadow infinite 4s alternate-reverse;
   width: var(--pic-size);
   height: var(--pic-size);
-  border-radius: var(--pic-size)/2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +103,7 @@
 }
 
 .SvgStroke {
-  animation: changing-color infinite 4s alternate-reverse;
+  animation: changing-color infinite 2s alternate-reverse;
 }
 
 .viewPicContainer {
@@ -121,7 +120,7 @@
 }
 
 .viewPicContainer .viewPic {
-  margin-bottom: var(--view-pic-inner-padding) / 2;
+  margin-bottom: calc(var(--view-pic-inner-padding) / 2);
   border: 1px solid lightgray;
   border-radius: 5px;
   width: 100%;
@@ -129,9 +128,8 @@
 }
 
 .viewPicContainer .viewPicDescr {
-  height: var(--view-picContainer-height) - var(--view-pic-height) - var(--view-pic-inner-padding);
   overflow-y: auto;
-  font-size: var(--view-pic-width) * 0.08;
+  font-size: calc(var(--view-pic-width) * 0.08);
 }
 
 .bigben {
@@ -203,4 +201,11 @@ https://mkrtchyan.ga
   -o-animation:move-twink-back 200s linear infinite;
   -webkit-animation:move-twink-back 200s linear infinite;
   animation:move-twink-back 200s linear infinite;
+}
+
+.audio {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
 }
