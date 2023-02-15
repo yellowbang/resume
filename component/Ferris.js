@@ -7,17 +7,10 @@ class Ferris extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundMusicIndex: 0,
       selectedPhotoIndex: 0,
     };
     this.timeoutFn = null;
   }
-
-  nextSong = () => {
-    this.setState({
-      backgroundMusicIndex: this.state.backgroundMusicIndex + 1,
-    });
-  };
 
   selectPhoto = (index) => {
     const me = this;
@@ -42,7 +35,7 @@ class Ferris extends Component {
   }
 
   render() {
-    const { photos, music } = this.props;
+    const { photos } = this.props;
     const TOTAL_CIRCLE = photos.length;
     let pics = [];
     let svgSize = 50;
@@ -142,14 +135,6 @@ class Ferris extends Component {
           src={'/images/Amit/big-ben.webp'}
           alt={'pic'}
         />
-        {music.length ? (
-          <audio
-            className={styles.audio}
-            src={this.props.music[0]}
-            controls
-            autoPlay
-          />
-        ) : null}
       </div>
     );
   }

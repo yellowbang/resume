@@ -17,7 +17,7 @@ const photos = [
   {
     src: '/images/Jojo/2023_Valentine/funny.png',
     descr:
-      '衣d系你最靓 moment 的合集。可惜今年抓拍得少，依然超越唔到你几年前的果长。',
+      '衣d系你最靓 moment 的合集。可惜今年抓拍得少，依然超越唔到你几年前的果长张。',
   },
   {
     src: '/images/Jojo/2023_Valentine/cruise.jpg',
@@ -76,7 +76,11 @@ const photos = [
 ];
 
 const Jojo_2023_Valentine: NextPage = () => {
-  const [play] = useSound('/sounds/xiaojiuwo.mp3');
+  const [play] = useSound('/sounds/xiaojiuwo.mp3', {
+    onend: () => {
+      play();
+    },
+  });
 
   useEffect(() => {
     play && play();
@@ -86,7 +90,7 @@ const Jojo_2023_Valentine: NextPage = () => {
     const body = document.getElementsByTagName('body')[0];
     body.className = 'overflowHidden';
   }
-  return <Ferris photos={photos} music={[]} />;
+  return <Ferris photos={photos} />;
 };
 
 export default Jojo_2023_Valentine;

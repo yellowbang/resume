@@ -24,7 +24,7 @@ const Amit: NextPage = () => {
     const body = document.getElementsByTagName('body')[0];
     body.className = 'overflowHidden';
   }
-  return <Ferris photos={photos} music={[]} />;
+  return <Ferris photos={photos} />;
 };
 
 export default Amit;
