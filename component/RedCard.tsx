@@ -6,6 +6,7 @@ interface Props {
   total: number;
   setRedCount: Dispatch<SetStateAction<number>>;
   setChance: Dispatch<SetStateAction<number>>;
+  disabled: boolean;
 }
 
 export default function RedCard({
@@ -13,11 +14,16 @@ export default function RedCard({
   total,
   setRedCount,
   setChance,
+  disabled,
 }: Props) {
   const [isRed, setIsRed] = React.useState(false);
   const [count, setCount] = React.useState(0);
 
+  const isNotClickable = disabled || count >= total;
   const onClick = () => {
+    if (isNotClickable) {
+      return;
+    }
     const newIsRed = Math.random() < redRate;
     setIsRed(newIsRed);
     setCount(count + 1);
@@ -30,6 +36,9 @@ export default function RedCard({
   let className = styles.redCard + ' ' + styles.leftCount;
   if (isRed) {
     className += ' ' + styles.red;
+  }
+  if (isNotClickable) {
+    className += ' ' + styles.disabled;
   }
 
   return (

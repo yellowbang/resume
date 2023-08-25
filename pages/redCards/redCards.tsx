@@ -15,30 +15,35 @@ const RedCards: NextPage = () => {
           total={20}
           setRedCount={setRedCount}
           setChance={setChance}
+          disabled={chance === 0}
         />
         <RedCard
           redRate={0.8}
           total={30}
           setRedCount={setRedCount}
           setChance={setChance}
+          disabled={chance === 0}
         />
         <RedCard
           redRate={0.5}
           total={50}
           setRedCount={setRedCount}
           setChance={setChance}
+          disabled={chance === 0}
         />
         <RedCard
           redRate={0.5}
           total={20}
           setRedCount={setRedCount}
           setChance={setChance}
+          disabled={chance === 0}
         />
         <RedCard
           redRate={0.2}
           total={20}
           setRedCount={setRedCount}
           setChance={setChance}
+          disabled={chance === 0}
         />
       </div>
       <div className={styles.redCards}>

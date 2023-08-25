@@ -30,12 +30,24 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+.redCard:not(.disabled):hover{
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.redCard:not(.disabled):active {
+  transform: scale(0.95);  /* Slightly reduces the size of the card when clicked */
 }
 .leftCount {
   font: 2em sans-serif;
 }
 .red {
   background-color: rgb(230, 110, 110);
+}
+.disabled {
+  cursor: not-allowed;
+  background-color: rgb(230, 230, 230);
 }
 .redText {
   color: rgb(230, 110, 110);
