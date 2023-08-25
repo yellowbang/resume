@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import type { NextPage } from "next";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Resume from "../component/Resume";
-import { set, ref, onValue } from "firebase/database";
-import { db } from "../firebase";
-import Images from "../component/Images";
+import { useState, useEffect } from 'react';
+import type { NextPage } from 'next';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Resume from '../component/Resume';
+import { set, ref, onValue } from 'firebase/database';
+import { db } from '../firebase';
+import Images from '../component/Images';
 
 const Home: NextPage = () => {
-  const [page, setPage] = useState("");
+  const [page, setPage] = useState('');
   const starCountRef = ref(db);
   onValue(starCountRef, (snapshot: any) => {
     const data = snapshot.val();
@@ -23,43 +23,43 @@ const Home: NextPage = () => {
       return;
     }
     document.addEventListener(
-      "keyup",
+      'keyup',
       (event) => {
         const keyName = event.key;
-        set(ref(db, "page"), keyName);
+        set(ref(db, 'page'), keyName);
       },
       false
     );
 
-    return (()=>{
-      set(ref(db, "page"), "0");
-    })
+    return () => {
+      set(ref(db, 'page'), '0');
+    };
   }, []);
 
   switch (page) {
-    case "1":
-    case "checkphish": {
+    case '1':
+    case 'checkphish': {
       return (
         <Images
-          images={["../images/checkphish1.png", "../images/checkphish2.png"]}
+          images={['../images/checkphish1.png', '../images/checkphish2.png']}
         ></Images>
       );
     }
-    case "2":
-    case "bolster": {
+    case '2':
+    case 'bolster': {
       return (
         <Images
-          images={["../images/platform1.png", "../images/platform2.png"]}
+          images={['../images/platform1.png', '../images/platform2.png']}
         ></Images>
       );
     }
-    case "3":
-    case "takedown": {
-      return <Images images={["../images/takedown.png"]}></Images>;
+    case '3':
+    case 'takedown': {
+      return <Images images={['../images/takedown.png']}></Images>;
     }
-    case "4":
-    case "cisco": {
-      return <Images images={["../images/cisco.webp"]}></Images>;
+    case '4':
+    case 'cisco': {
+      return <Images images={['../images/cisco.webp']}></Images>;
     }
     default: {
       return <Resume />;

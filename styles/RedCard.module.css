@@ -1,0 +1,42 @@
+.redCardsPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.redCardsCount{
+  font: 3em sans-serif;
+}
+.redCards{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+
+
+.redCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.redCard {
+  margin: 10px;
+  width: 10vw;
+  height: 16vw;
+  border-radius: 5px;
+  background-color: rgb(110, 110, 230);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.leftCount {
+  font: 2em sans-serif;
+}
+.red {
+  background-color: rgb(230, 110, 110);
+}
+.redText {
+  color: rgb(230, 110, 110);
+}
