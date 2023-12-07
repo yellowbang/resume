@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Resume from '../component/Resume';
 import { set, ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import Images from '../component/Images';
+import RentalAgreement from './RentalAgreement';
 
 const Home: NextPage = () => {
   const [page, setPage] = useState('');
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
       return <Images images={['../images/cisco.webp']}></Images>;
     }
     default: {
-      return <Resume />;
+      return <RentalAgreement />;
     }
   }
 };

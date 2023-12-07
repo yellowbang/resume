@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import details from '../public/constants/401';
 import {
@@ -275,7 +274,7 @@ const RentalAgreement = () => {
               <h4>SMOKING</h4>
               <div>
                 The Premises are designated as a property where smoking is
-                <b>Not Permitted.</b>
+                <b> Not Permitted.</b>
               </div>
               <div>
                 {`For the purposes of clarifying and restricting its use, the term
@@ -404,7 +403,10 @@ const RentalAgreement = () => {
           </div>
           <div>TENANT(S):</div>
           {tenants.map((t) => (
-            <SignatureItem key={t.name} name={t.name === PLACEHOLDER? '' : t.name}></SignatureItem>
+            <SignatureItem
+              key={t.name}
+              name={t.name === PLACEHOLDER ? '' : t.name}
+            ></SignatureItem>
           ))}
           <div className="mt-4">LANDLORD(S):</div>
           <SignatureItem name={landlord}></SignatureItem>

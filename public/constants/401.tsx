@@ -1,4 +1,4 @@
-import { PLACEHOLDER } from "./Provisions";
+import { PLACEHOLDER } from './Provisions';
 
 const LANDLORD = 'Ming Hua Huang';
 const NUMBER = '(415)885-9124';
@@ -20,10 +20,10 @@ const moveInFee = {
 };
 
 const lateFee = '$100.00';
-const startDate = '10/01/2022';
-const endDate = '10/01/2023';
+const startDate = PLACEHOLDER;
+const endDate = PLACEHOLDER;
 
-const rentailDetail401 =  {
+const rentailDetal401 = {
   landlord: LANDLORD,
   number: NUMBER,
   email: EMAIL,
@@ -45,4 +45,4 @@ const rentailDetail401 =  {
   ],
 };
 
-export default rentailDetail401
+export default rentailDetal401;
