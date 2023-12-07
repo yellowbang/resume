@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { set, ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import Images from '../component/Images';
-import RentalAgreement from './RentalAgreement';
+import Resume from '../component/Resume';
 
 const Home: NextPage = () => {
   const [page, setPage] = useState('');
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
       return <Images images={['../images/cisco.webp']}></Images>;
     }
     default: {
-      return <RentalAgreement />;
+      return <Resume />;
     }
   }
 };
