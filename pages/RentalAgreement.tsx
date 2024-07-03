@@ -56,9 +56,9 @@ const RentalAgreement = () => {
       <h1 className="title">Rental Agreement</h1>
       <div className="d-flex align-items-center pb-3">
         <span className="px-1">Between:</span>
-        <b>{landlord}</b>
-        <span className="px-1">and</span>
         <b>{tenants.map((t) => t.name).join(', ')}</b>
+        <span className="px-1">and</span>
+        <b>{landlord}</b>
       </div>
       <h2>Summary</h2>
       <ul>
