@@ -1,0 +1,660 @@
+/* Warriors Gallery 2D Styles */
+.warriorsGallery {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1f3a93 0%, #ffc72c 100%);
+  font-family: "Arial", sans-serif;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1f3a93 0%, #0f1c4c 100%) !important;
+  color: #ffc72c;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: auto !important;
+  display: block !important;
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem !important;
+  font-weight: bold;
+  margin: 0;
+  display: block !important;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+  line-height: 1.2;
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(255, 199, 44, 0.3);
+  }
+}
+
+.subtitle {
+  font-size: 1.1rem !important;
+  margin: 0.5rem 0 1rem 0;
+  opacity: 0.9;
+  display: block !important;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.instructions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+.instructions span {
+  white-space: nowrap;
+}
+
+/* Game Controls */
+.gameControls {
+  background: linear-gradient(135deg, #ffc72c 0%, #e6b800 100%);
+  color: #1f3a93;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border-bottom: 3px solid #1f3a93;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.controlGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.controlGroup input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #1f3a93;
+}
+
+.controlGroup button {
+  background: #1f3a93;
+  color: #ffc72c;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px;
+}
+
+.controlGroup button:hover:not(:disabled) {
+  background: #0f1c4c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.controlGroup button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Museum Container */
+.museumContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1d428a 0%, #ffd700 100%);
+  font-family: "Arial", sans-serif;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.museumFloor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+}
+
+.museumSvg {
+  border: 4px solid #654321;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #f0f8ff, #e6f3ff);
+  transition: opacity 0.3s ease;
+}
+
+.textPoint {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.textPoint:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.photoPoint {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.photoPoint:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Text Modal */
+.textModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+  padding: 2rem;
+}
+
+/* Photo Modal */
+.photoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+  padding: 2rem;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  background: linear-gradient(145deg, #ffc72c, #e6b800);
+  border: 5px solid #1f3a93;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  max-height: 300px;
+  position: relative;
+  overflow: auto;
+  animation: modalSlideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Photo modal specific sizing */
+.photoModal .modalContent {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: scale(0.8) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #1f3a93;
+  color: #ffc72c;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: #0f1c4c;
+  transform: scale(1.1);
+}
+
+.modalImage {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 15px;
+  border: 4px solid #1f3a93;
+  margin-bottom: 1.5rem;
+  object-fit: contain;
+}
+
+.modalInfo {
+  text-align: center;
+  max-width: 400px;
+}
+
+.modalInfo h2 {
+  color: #1f3a93;
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.modalCategory {
+  background: rgba(31, 58, 147, 0.2);
+  color: #1f3a93;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.modalInfo p {
+  color: #1f3a93;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.loveMessage {
+  color: #1f3a93;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Game Completion Modal */
+.gameCompletionModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: modalFadeIn 0.3s ease-out;
+  padding: 2rem;
+}
+
+.gameCompletionContent {
+  background: linear-gradient(145deg, #4caf50, #2e7d32);
+  border: 5px solid #ffd700;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  text-align: center;
+  animation: modalSlideIn 0.3s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  color: white;
+  position: relative;
+}
+
+.gameCompletionContent h2 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: celebration 2s ease-in-out infinite;
+}
+
+@keyframes celebration {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.gameCompletionContent p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.finalImageContainer {
+  margin: 1.5rem 0;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 4px solid #ffd700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.finalImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.gameCompletionContent .restartButton {
+  background: #ffd700;
+  color: #2e7d32;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.gameCompletionContent .restartButton:hover {
+  background: #ffc107;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Game Over Modal */
+.gameOverModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: modalFadeIn 0.3s ease-out;
+  padding: 2rem;
+}
+
+.gameOverContent {
+  background: linear-gradient(145deg, #ff4444, #cc0000);
+  border: 5px solid #ffffff;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 500px;
+  text-align: center;
+  animation: modalSlideIn 0.3s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.gameOverContent h2 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.gameOverContent p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.restartButton {
+  background: #ffffff;
+  color: #ff4444;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.restartButton:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Mini Map */
+.miniMap {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #654321;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  backdrop-filter: blur(10px);
+}
+
+.miniMap h4 {
+  margin: 0 0 0.5rem 0;
+  color: #654321;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.miniMapSvg {
+  border: 2px solid #654321;
+  border-radius: 5px;
+  background: #87ceeb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 0.5rem !important;
+    height: auto !important;
+  }
+
+  .title {
+    font-size: 1.8rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .subtitle {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    margin: 0.3rem 0 0.8rem 0 !important;
+  }
+
+  .instructions {
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .instructions span {
+    text-align: center;
+    margin: 0.1rem 0;
+  }
+
+  .gameControls {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .controlGroup {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .museumFloor {
+    padding: 1rem;
+  }
+
+  .museumSvg {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+  }
+
+  .modalContent {
+    max-width: 90vw;
+    padding: 1.5rem;
+  }
+
+  .gameOverContent {
+    max-width: 90vw;
+    padding: 2rem;
+  }
+
+  .gameCompletionContent {
+    max-width: 90vw;
+    padding: 2rem;
+  }
+
+  .finalImage {
+    max-width: 300px;
+  }
+
+  .miniMap {
+    bottom: 10px;
+    right: 10px;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem 0.3rem !important;
+  }
+
+  .title {
+    font-size: 1.4rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .subtitle {
+    font-size: 0.85rem !important;
+    margin: 0.2rem 0 0.6rem 0 !important;
+  }
+
+  .instructions {
+    font-size: 0.75rem;
+    gap: 0.2rem;
+  }
+
+  .instructions span {
+    font-size: 0.75rem;
+    margin: 0.05rem 0;
+  }
+
+  .museumSvg {
+    max-width: 300px;
+    max-height: 225px;
+  }
+
+  .closeButton {
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+    top: 10px;
+    right: 15px;
+  }
+
+  .gameOverContent h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Animation for pulsing collectible points */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.textPoint[data-nearby="true"] {
+  animation: pulse 1s infinite;
+}
+
+.photoPoint[data-nearby="true"] {
+  animation: pulse 1s infinite;
+}
+
+/* Floor pattern enhancement */
+.museumSvg rect[fill*="floorPattern"] {
+  transition: opacity 0.3s ease;
+}
+
+.museumSvg rect[fill="#654321"] {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
