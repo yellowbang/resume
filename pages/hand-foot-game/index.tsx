@@ -135,15 +135,15 @@ const HandFootGame: React.FC = () => {
             </div>
 
             <div className={styles.modalControls}>
-              <button className={styles.resetButton} onClick={resetToDefault}>
-                重置为默认
+              <button className={styles.resetButton} onClick={saveNouns}>
+                Save
               </button>
               <div className={styles.modalButtons}>
                 <button className={styles.cancelButton} onClick={cancelEdit}>
                   取消
                 </button>
-                <button className={styles.saveButton} onClick={saveNouns}>
-                  保存
+                <button className={styles.submitButton} onClick={saveNouns}>
+                  提交
                 </button>
               </div>
             </div>

@@ -208,13 +208,14 @@
 }
 
 .modalButtons {
+  width: 80px;
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
 }
 
 .cancelButton,
-.saveButton {
+.submitButton {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 10px;
@@ -236,12 +237,12 @@
   transform: translateY(-1px);
 }
 
-.saveButton {
+.submitButton {
   background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
-.saveButton:hover {
+.submitButton:hover {
   transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
@@ -287,7 +288,7 @@
   }
 
   .cancelButton,
-  .saveButton {
+  .submitButton {
     width: 100%;
   }
 }

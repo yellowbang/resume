@@ -170,20 +170,20 @@ const photoPoints = [
     description: "The passionate energy of Warriors faithful",
     category: "Fans",
   },
-  // {
-  //   id: 13,
-  //   x: 630,
-  //   y: 15,
-  //   src: "/images/panda/p11.jpeg",
-  //   title: "Fan Culture",
-  //   description: "The passionate energy of Warriors faithful",
-  //   category: "Fans",
-  // },
+  {
+    id: 13,
+    x: 630,
+    y: 35,
+    src: "/images/panda/p13.jpeg",
+    title: "Fan Culture",
+    description: "The passionate energy of Warriors faithful",
+    category: "Fans",
+  },
   // {
   //   id: 14,
   //   x: 630,
   //   y: 515,
-  //   src: "/images/panda/p11.jpeg",
+  //   src: "/images/panda/p14.jpeg",
   //   title: "Fan Culture",
   //   description: "The passionate energy of Warriors faithful",
   //   category: "Fans",
@@ -343,8 +343,8 @@ const WarriorsGallery: NextPage = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   // Array of video IDs and their durations in seconds
-  const videoIds = ["kntvYI2xneQ", "vmmRFJcDJJw"];
-  const videoDurations = [200, 313]; // Song 1: 200s, Song 2: 350s
+  const videoIds = ["vmmRFJcDJJw", "kntvYI2xneQ"];
+  const videoDurations = [313, 200]; // Song 1: 200s, Song 2: 350s
   const [cloud, setCloud] = useState<{
     x: number;
     y: number;
@@ -364,6 +364,7 @@ const WarriorsGallery: NextPage = () => {
   const keysPressed = useRef<Set<string>>(new Set());
   const gameLoopRef = useRef<number>();
   const frameCounterRef = useRef<number>(0);
+  const gamePausedRef = useRef<boolean>(false);
 
   // Initialize defendants only on client side to prevent SSR hydration mismatch
   useEffect(() => {
@@ -413,7 +414,7 @@ const WarriorsGallery: NextPage = () => {
 
   // Check if player is near a text point
   const checkNearbyText = useCallback((playerX: number, playerY: number) => {
-    const threshold = 30; // Increased from 40 to match photo threshold
+    const threshold = 30; // Increased threshold for better detection
     return textPoints.find((point) => {
       const distance = Math.sqrt(
         Math.pow(
@@ -431,7 +432,7 @@ const WarriorsGallery: NextPage = () => {
 
   // Check if player is near a photo point
   const checkNearbyPhoto = useCallback((playerX: number, playerY: number) => {
-    const threshold = 30; // Increased from 40 to match text threshold
+    const threshold = 50; // Increased threshold for better detection
     return photoPoints.find((point) => {
       const distance = Math.sqrt(
         Math.pow(
@@ -449,7 +450,7 @@ const WarriorsGallery: NextPage = () => {
 
   // Move defendants randomly (throttled for performance)
   const moveDefendants = useCallback(() => {
-    if (!defendantsEnabled || gamePaused) return;
+    if (!defendantsEnabled || gamePausedRef.current) return;
 
     setDefendants((prevDefendants) =>
       prevDefendants.map((defendant) => {
@@ -512,11 +513,11 @@ const WarriorsGallery: NextPage = () => {
         };
       })
     );
-  }, [defendantsEnabled, gamePaused]);
+  }, [defendantsEnabled]);
 
   // Manage cloud movement and spawning
   const manageCloud = useCallback(() => {
-    if (!cloudEnabled || gamePaused) return;
+    if (!cloudEnabled || gamePausedRef.current) return;
 
     setCloud((prevCloud) => {
       let newCloud = { ...prevCloud };
@@ -579,11 +580,11 @@ const WarriorsGallery: NextPage = () => {
 
       return newCloud;
     });
-  }, [cloudEnabled, gamePaused]);
+  }, [cloudEnabled]);
 
   // Game loop for smooth movement
   const gameLoop = useCallback(() => {
-    if (gameOver || gamePaused) return;
+    if (gameOver || gamePausedRef.current) return;
 
     frameCounterRef.current++;
     const speed = 1;
@@ -648,47 +649,43 @@ const WarriorsGallery: NextPage = () => {
 
     // Move defendants and manage cloud less frequently for performance
     if (frameCounterRef.current % 2 === 0) {
-      moveDefendants();
-      manageCloud();
+      // Check pause state directly before calling movement functions
+      if (!gamePausedRef.current) {
+        moveDefendants();
+        manageCloud();
+      }
     }
   }, [
     gameOver,
-    gamePaused,
     checkCollision,
     checkDefendantCollision,
     moveDefendants,
     manageCloud,
   ]);
 
-  // Update nearby items separately (throttled for performance)
+  // Update nearby items immediately when player positions change
   useEffect(() => {
-    const checkNearbyItems = () => {
-      const nearbyTextPoint1 = checkNearbyText(
-        player1Position.x,
-        player1Position.y
-      );
-      const nearbyPhotoPoint1 = checkNearbyPhoto(
-        player1Position.x,
-        player1Position.y
-      );
-      const nearbyTextPoint2 = checkNearbyText(
-        player2Position.x,
-        player2Position.y
-      );
-      const nearbyPhotoPoint2 = checkNearbyPhoto(
-        player2Position.x,
-        player2Position.y
-      );
+    const nearbyTextPoint1 = checkNearbyText(
+      player1Position.x,
+      player1Position.y
+    );
+    const nearbyPhotoPoint1 = checkNearbyPhoto(
+      player1Position.x,
+      player1Position.y
+    );
+    const nearbyTextPoint2 = checkNearbyText(
+      player2Position.x,
+      player2Position.y
+    );
+    const nearbyPhotoPoint2 = checkNearbyPhoto(
+      player2Position.x,
+      player2Position.y
+    );
 
-      setNearbyText1(nearbyTextPoint1 ? nearbyTextPoint1.id : null);
-      setNearbyPhoto1(nearbyPhotoPoint1 ? nearbyPhotoPoint1.id : null);
-      setNearbyText2(nearbyTextPoint2 ? nearbyTextPoint2.id : null);
-      setNearbyPhoto2(nearbyPhotoPoint2 ? nearbyPhotoPoint2.id : null);
-    };
-
-    // Throttle the nearby items check to improve performance
-    const throttleId = setTimeout(checkNearbyItems, 16); // ~60fps throttle
-    return () => clearTimeout(throttleId);
+    setNearbyText1(nearbyTextPoint1 ? nearbyTextPoint1.id : null);
+    setNearbyPhoto1(nearbyPhotoPoint1 ? nearbyPhotoPoint1.id : null);
+    setNearbyText2(nearbyTextPoint2 ? nearbyTextPoint2.id : null);
+    setNearbyPhoto2(nearbyPhotoPoint2 ? nearbyPhotoPoint2.id : null);
   }, [player1Position, player2Position, checkNearbyText, checkNearbyPhoto]);
 
   // Update defendant count
@@ -708,6 +705,7 @@ const WarriorsGallery: NextPage = () => {
     setGameOver(false);
     setGameCompleted(false);
     setGamePaused(false);
+    gamePausedRef.current = false; // Keep ref in sync
     setPlayer1Position({ x: 50, y: 50 });
     setPlayer2Position({ x: 100, y: 50 });
     setCollectedTexts(new Set());
@@ -739,6 +737,7 @@ const WarriorsGallery: NextPage = () => {
     ) {
       setGameCompleted(true);
       setGamePaused(true);
+      gamePausedRef.current = true; // Keep ref in sync
     }
   }, [collectedTexts.size, collectedPhotos.size, gameCompleted]);
 
@@ -747,6 +746,7 @@ const WarriorsGallery: NextPage = () => {
     const isModalOpen =
       selectedText !== null || selectedPhoto !== null || gameCompleted;
     setGamePaused(isModalOpen);
+    gamePausedRef.current = isModalOpen; // Keep ref in sync
   }, [selectedText, selectedPhoto, gameCompleted]);
 
   // Keyboard event handlers
@@ -757,17 +757,10 @@ const WarriorsGallery: NextPage = () => {
       // Space or Enter to view text or photo for either player
       if (event.code === "Space" || event.code === "Enter") {
         event.preventDefault();
-        console.log("SPACE/ENTER pressed", {
-          nearbyText1,
-          nearbyText2,
-          nearbyPhoto1,
-          nearbyPhoto2,
-        });
 
         // Check Player 1 nearby items
         if (nearbyText1) {
           const textPoint = textPoints.find((p) => p.id === nearbyText1);
-          console.log("Player 1 found text point", textPoint);
           if (textPoint) {
             setSelectedText(textPoint.text);
             setCollectedTexts(
@@ -775,7 +768,6 @@ const WarriorsGallery: NextPage = () => {
             );
           }
         } else if (nearbyPhoto1) {
-          console.log("Player 1 found photo point", nearbyPhoto1);
           setSelectedPhoto(nearbyPhoto1);
           setCollectedPhotos(
             (prev) => new Set([...Array.from(prev), nearbyPhoto1])
@@ -784,7 +776,6 @@ const WarriorsGallery: NextPage = () => {
         // Check Player 2 nearby items
         else if (nearbyText2) {
           const textPoint = textPoints.find((p) => p.id === nearbyText2);
-          console.log("Player 2 found text point", textPoint);
           if (textPoint) {
             setSelectedText(textPoint.text);
             setCollectedTexts(
@@ -792,7 +783,6 @@ const WarriorsGallery: NextPage = () => {
             );
           }
         } else if (nearbyPhoto2) {
-          console.log("Player 2 found photo point", nearbyPhoto2);
           setSelectedPhoto(nearbyPhoto2);
           setCollectedPhotos(
             (prev) => new Set([...Array.from(prev), nearbyPhoto2])
@@ -865,7 +855,7 @@ const WarriorsGallery: NextPage = () => {
       gameLoopRef.current = requestAnimationFrame(animate);
     };
 
-    if (!gameOver && !gamePaused) {
+    if (!gameOver && !gamePausedRef.current) {
       gameLoopRef.current = requestAnimationFrame(animate);
     }
 
@@ -874,7 +864,7 @@ const WarriorsGallery: NextPage = () => {
         cancelAnimationFrame(gameLoopRef.current);
       }
     };
-  }, [gameLoop, gameOver, gamePaused]);
+  }, [gameLoop, gameOver]);
 
   // Calculate totals for display
   const totalCollectibles = textPoints.length + photoPoints.length;
@@ -902,42 +892,7 @@ const WarriorsGallery: NextPage = () => {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>🐼⚡ 愛情當入樽</h1>
-          <p className={styles.subtitle}>
-            Navigate the maze, collect love messages & Warriors photos, avoid
-            the Warriors players! Click &quot;Start Background Music&quot; to
-            enjoy tunes while you play! 🎵
-          </p>
-          <div className={styles.instructions}>
-            <span>🐼 Player 1: Arrow Keys</span>
-            <span>•</span>
-            <span>⚡ Player 2: WSAD Keys</span>
-            <span>•</span>
-            <span>💝 Get close to hearts and press SPACE</span>
-            <span>•</span>
-            <span>🏀 Get close to basketballs and press SPACE</span>
-            <span>•</span>
-            <span>⛈️ Storm cloud blocks your vision!</span>
-            <span>•</span>
-            <span>
-              📝 {collectedTexts.size}/{textPoints.length} messages • 📸{" "}
-              {collectedPhotos.size}/{photoPoints.length} photos
-            </span>
-            {gameOver && (
-              <>
-                <span>•</span>
-                <span style={{ color: "#1D428A" }}>
-                  🏀 CAUGHT BY WARRIORS! Press R to restart
-                </span>
-              </>
-            )}
-            {gamePaused && !gameOver && (
-              <>
-                <span>•</span>
-                <span style={{ color: "#ffc72c" }}>⏸️ GAME PAUSED</span>
-              </>
-            )}
-          </div>
+          <h1 className={styles.title}>🐼⚡ 愛情當入迦南地</h1>
         </div>
       </header>
 
@@ -1020,41 +975,6 @@ const WarriorsGallery: NextPage = () => {
             Total Progress: {totalCollected}/{totalCollectibles}
           </span>
         </div>
-        {/* Debug Panel */}
-        {/* <div
-          className={styles.debugPanel}
-          style={{
-            background: "#f0f0f0",
-            padding: "10px",
-            borderRadius: "5px",
-            fontSize: "12px",
-            marginTop: "10px",
-          }}
-        >
-          <div>
-            <strong>Debug Info:</strong>
-          </div>
-          <div>
-            🐼 P1: ({Math.round(player1Position.x)},{" "}
-            {Math.round(player1Position.y)}) - Nearby Text:{" "}
-            {nearbyText1 || "None"} | Photo: {nearbyPhoto1 || "None"}
-          </div>
-          <div>
-            ⚡ P2: ({Math.round(player2Position.x)},{" "}
-            {Math.round(player2Position.y)}) - Nearby Text:{" "}
-            {nearbyText2 || "None"} | Photo: {nearbyPhoto2 || "None"}
-          </div>
-          <div>
-            Warriors Players: {defendants.length} | Text Points:{" "}
-            {textPoints.length}
-          </div>
-          <div>
-            ⛈️ Storm Cloud: {cloud.active ? "Active" : "Inactive"} | Timer:{" "}
-            {cloud.spawnTimer} |
-            {cloud.active &&
-              ` Pos: (${Math.round(cloud.x)}, ${Math.round(cloud.y)})`}
-          </div>
-        </div> */}
       </div>
 
       {/* Museum Floor */}
