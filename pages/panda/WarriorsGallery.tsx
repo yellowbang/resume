@@ -8,7 +8,7 @@ import React, {
 import type { NextPage } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/WarriorsGallery.module.css";
-import { texts } from "./constant";
+import { texts } from "../../constants/panda";
 
 // Museum layout configuration
 const MUSEUM_WIDTH = 800;
