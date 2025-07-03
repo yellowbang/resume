@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import type { NextPage } from "next";
+import Script from "next/script";
 import styles from "../../styles/Maze.module.css";
 
 interface Wall {
@@ -14,6 +15,7 @@ interface Treasure {
   x: number;
   y: number;
   photo: string;
+  icon: string;
 }
 
 // --- Maze Configuration ---
@@ -46,7 +48,7 @@ const initialWalls: Wall[] = [
   { x: 221, y: 189, width: 5, height: 213 },
   { x: 395, y: 275, width: 5, height: 168 },
   { x: 219, y: 468, width: 5, height: 15 },
-  { x: 219, y: 509, width: 5, height: 202 },
+  { x: 219, y: 529, width: 5, height: 182 },
   { x: 97, y: 706, width: 5, height: 50 },
   { x: 219, y: 825, width: 5, height: 134 },
   { x: 221, y: 759, width: 5, height: 15 },
@@ -81,20 +83,125 @@ const initialWalls: Wall[] = [
   { x: 219, y: 870, width: 13, height: 5 },
 ];
 
-const initialTreasures: Treasure[] = [
-  { id: 1, x: 100, y: 260, photo: "/images/Jojo/2025_Birthday/p1.jpg" },
-  { id: 2, x: 655, y: 234, photo: "/images/Jojo/2025_Birthday/p2.jpg" },
-  { id: 3, x: 640, y: 400, photo: "/images/Jojo/2025_Birthday/p3.jpg" },
-  { id: 4, x: 450, y: 800, photo: "/images/Jojo/2025_Birthday/p4.jpg" },
-  { id: 5, x: 100, y: 400, photo: "/images/Jojo/2025_Birthday/p5.jpg" },
-  { id: 6, x: 750, y: 40, photo: "/images/Jojo/2025_Birthday/p6.jpg" },
+const treasureIcons = [
+  "💎",
+  "🌟",
+  "🏆",
+  "🎂",
+  "🎈",
+  "💝",
+  "🎊",
+  "🎀",
+  "💐",
+  "🌺",
+  "🔮",
+  "🎁",
 ];
 
+const treasureData = [
+  {
+    id: 1,
+    x: 100,
+    y: 260,
+    photo: "/images/Jojo/2025_Birthday/p1.jpg",
+    text: "谢谢你买新衫給我,会继续努力，希望将来买一个属于你的 closet 比你。可以放好多好多的靓衫。",
+  },
+  {
+    id: 2,
+    x: 655,
+    y: 234,
+    photo: "/images/Jojo/2025_Birthday/p2.jpg",
+    text: "谢谢你准备一堆零食比 Nova，比大家。虽然唔健康，但给生活增加多些乐趣",
+  },
+  {
+    id: 3,
+    x: 640,
+    y: 400,
+    photo: "/images/Jojo/2025_Birthday/p3.jpg",
+    text: "谢谢你煮靓面比我地做早餐，便靓正的最佳典范。同时辛苦你朝朝都要准备lunch 比Nova，辛苦你。",
+  },
+  {
+    id: 4,
+    x: 350,
+    y: 600,
+    photo: "/images/Jojo/2025_Birthday/p4.jpg",
+    text: "谢谢你经常带Nova去图书馆，周期性甘更新d 书，Nova 智力靠晒你的付出",
+  },
+  {
+    id: 5,
+    x: 100,
+    y: 400,
+    photo: "/images/Jojo/2025_Birthday/p5.jpg",
+    text: "谢谢你的靓被，靓床褥，甘先会有靓的运动",
+  },
+  {
+    id: 6,
+    x: 750,
+    y: 40,
+    photo: "/images/Jojo/2025_Birthday/p6.jpg",
+    text: "谢谢你去 Oakland 冒住危险甘买送。好多时候都你都要拿一大箱食物，辛苦你。我地餐餐都有餐正野吃全靠你啊。",
+  },
+  {
+    id: 7,
+    x: 770,
+    y: 190,
+    photo: "/images/Jojo/2025_Birthday/p7.jpg",
+    text: "谢谢你坚持做运动。等我都有积极的影响。好喜欢这种互相进步的感觉",
+  },
+  {
+    id: 8,
+    x: 100,
+    y: 600,
+    photo: "/images/Jojo/2025_Birthday/p8.jpg",
+    text: "谢谢你教识 Nova 自己着衫，刷牙，冲凉。睇住 Nova 成长，都系你的功劳",
+  },
+  {
+    id: 9,
+    x: 300,
+    y: 350,
+    photo: "/images/Jojo/2025_Birthday/p9.jpg",
+    text: "谢谢你好积极甘带 Nova 学游水。仲同佢冲埋凉。还有个厕所，几乎日日擦地，同清洗个隔漏， keep 得个厕所好干净。",
+  },
+  {
+    id: 10,
+    x: 80,
+    y: 900,
+    photo: "/images/Jojo/2025_Birthday/p10.jpg",
+    text: "谢谢你会take care 四大长老，芳华全娟，你带佢地睇医生，买药，频频噗噗。见到你甘有孝心令我地感到好温暖，安心。",
+  },
+];
+
+const otherPics = [
+  "/images/Jojo/2025_Birthday/others/o1.jpg",
+  "/images/Jojo/2025_Birthday/others/o2.jpg",
+  "/images/Jojo/2025_Birthday/others/o3.jpg",
+  "/images/Jojo/2025_Birthday/others/o4.jpg",
+  "/images/Jojo/2025_Birthday/others/o5.jpg",
+  "/images/Jojo/2025_Birthday/others/o6.jpg",
+  "/images/Jojo/2025_Birthday/others/o7.jpg",
+  "/images/Jojo/2025_Birthday/others/o8.jpg",
+  "/images/Jojo/2025_Birthday/others/o9.jpg",
+  "/images/Jojo/2025_Birthday/others/o10.jpg",
+  "/images/Jojo/2025_Birthday/others/o11.jpg",
+  "/images/Jojo/2025_Birthday/others/o12.jpg",
+  "/images/Jojo/2025_Birthday/others/o13.jpg",
+  "/images/Jojo/2025_Birthday/others/o14.jpg",
+];
+
+const initialTreasures: Treasure[] = treasureData.map((treasure, index) => ({
+  ...treasure,
+  icon: treasureIcons[index % treasureIcons.length],
+}));
+
 const MazePage: NextPage = () => {
+  const musicButtonRef = useRef<HTMLButtonElement>(null);
   const [playerPosition, setPlayerPosition] = useState({ x: 245, y: 856 });
   const [walls, setWalls] = useState<Wall[]>(initialWalls);
   const [treasures, setTreasures] = useState<Treasure[]>(initialTreasures);
   const [collectedTreasures, setCollectedTreasures] = useState<Treasure[]>([]);
+  const [discoveredTreasures, setDiscoveredTreasures] = useState<Set<number>>(
+    new Set()
+  );
   const [nearbyTreasure, setNearbyTreasure] = useState<Treasure | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [newWall, setNewWall] = useState<Wall | null>(null);
@@ -117,6 +224,10 @@ const MazePage: NextPage = () => {
     offsetY: number;
   } | null>(null);
   const [playerIsFlashing, setPlayerIsFlashing] = useState(false);
+  const [musicEnabled, setMusicEnabled] = useState(false);
+  const [musicStarted, setMusicStarted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const keysPressed = useRef<Set<string>>(new Set());
   const gameLoopRef = useRef<number>();
@@ -129,6 +240,48 @@ const MazePage: NextPage = () => {
       console.error("Failed to save walls to local storage", error);
     }
   }, [walls]);
+
+  const allTreasuresFound =
+    treasures.length > 0 && discoveredTreasures.size === treasures.length;
+
+  const openModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const showNextImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === otherPics.length - 1 ? 0 : prevIndex + 1
+    );
+  }, []);
+
+  const showPrevImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? otherPics.length - 1 : prevIndex - 1
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleModalKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        showNextImage();
+      } else if (event.key === "ArrowLeft") {
+        showPrevImage();
+      } else if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleModalKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleModalKeyDown);
+    };
+  }, [isModalOpen, showNextImage, showPrevImage, closeModal]);
 
   const checkCollision = useCallback(
     (x: number, y: number) => {
@@ -166,6 +319,7 @@ const MazePage: NextPage = () => {
     const playerCenterY = playerPosition.y + PLAYER_SIZE / 2;
 
     const newlyCollectedTreasures: Treasure[] = [];
+    const newlyDiscoveredTreasures: number[] = [];
     let closestTreasure: Treasure | null = null;
     let closestDistance = Infinity;
 
@@ -175,15 +329,29 @@ const MazePage: NextPage = () => {
           Math.pow(playerCenterY - treasure.y, 2)
       );
 
-      // Check if player is near the treasure (for photo preview)
-      const nearbyRadius = 80; // Larger radius for photo preview
-      if (distance < nearbyRadius && distance < closestDistance) {
+      // Check if player is near the treasure (for discovery and photo preview)
+      const discoveryRadius = 20; // Radius for discovering hidden treasures
+      const nearbyRadius = 20; // Radius for photo preview
+
+      // Mark treasure as discovered if player gets close enough
+      if (distance < discoveryRadius && !discoveredTreasures.has(treasure.id)) {
+        newlyDiscoveredTreasures.push(treasure.id);
+      }
+
+      if (
+        distance < nearbyRadius &&
+        distance < closestDistance &&
+        discoveredTreasures.has(treasure.id)
+      ) {
         closestTreasure = treasure;
         closestDistance = distance;
       }
 
       // Check if player is touching the treasure (for collection)
-      if (distance < PLAYER_SIZE / 2 + TREASURE_SIZE) {
+      if (
+        distance < PLAYER_SIZE / 2 + TREASURE_SIZE &&
+        discoveredTreasures.has(treasure.id)
+      ) {
         // Check if this treasure is already collected
         const isAlreadyCollected = collectedTreasures.some(
           (collected) => collected.id === treasure.id
@@ -195,6 +363,13 @@ const MazePage: NextPage = () => {
       }
     }
 
+    // Update discovered treasures
+    if (newlyDiscoveredTreasures.length > 0) {
+      setDiscoveredTreasures(
+        (prev) => new Set([...Array.from(prev), ...newlyDiscoveredTreasures])
+      );
+    }
+
     // Update nearby treasure
     setNearbyTreasure(closestTreasure);
 
@@ -204,7 +379,13 @@ const MazePage: NextPage = () => {
     } else {
       setPlayerIsFlashing(false);
     }
-  }, [playerPosition.x, playerPosition.y, treasures, collectedTreasures]);
+  }, [
+    playerPosition.x,
+    playerPosition.y,
+    treasures,
+    collectedTreasures,
+    discoveredTreasures,
+  ]);
 
   const gameLoop = useCallback(() => {
     setPlayerPosition((prevPos) => {
@@ -395,9 +576,25 @@ const MazePage: NextPage = () => {
     setWalls(initialWalls);
     setTreasures(initialTreasures);
     setCollectedTreasures([]);
+    setDiscoveredTreasures(new Set());
     setPlayerPosition({ x: 245, y: 856 });
     setNearbyTreasure(null);
   };
+
+  // Start music with user interaction
+  const startMusic = useCallback(() => {
+    setMusicStarted(true);
+    setMusicEnabled(true);
+  }, []);
+
+  // Toggle music on/off
+  const toggleMusic = useCallback(() => {
+    if (!musicStarted) {
+      startMusic();
+    } else {
+      setMusicEnabled(!musicEnabled);
+    }
+  }, [musicEnabled, musicStarted, startMusic]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -428,10 +625,80 @@ const MazePage: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      {/* YouTube Background Music */}
+      {musicEnabled && musicStarted && (
+        <div style={{ position: "fixed", top: "-1000px", left: "-1000px" }}>
+          <iframe
+            key={musicStarted ? "music-on" : "music-off"}
+            width="0"
+            height="0"
+            src="https://www.youtube.com/embed/zrs5UftPa4E?autoplay=1&loop=1&playlist=zrs5UftPa4E&controls=0&muted=0&enablejsapi=1&rel=0&modestbranding=1"
+            title="Background Music"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ display: "none" }}
+          />
+        </div>
+      )}
+
       <h1 className={styles.title}>
         🎉 Happy Birthday, Jojo! 🎂
         <span className={styles.sparkle}>✨</span>
       </h1>
+
+      {/* Music control button */}
+      <div
+        style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          zIndex: 1000,
+        }}
+      >
+        <button
+          onClick={toggleMusic}
+          ref={musicButtonRef}
+          style={{
+            width: "120px",
+            height: "60px",
+            borderRadius: "30px",
+            backgroundColor: !musicStarted
+              ? "#FF69B4"
+              : musicEnabled
+              ? "#FF1493"
+              : "#FF69B4",
+            border: "none",
+            color: "white",
+            fontSize: "14px",
+            cursor: "pointer",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            transition: "all 0.3s ease",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            fontWeight: "bold",
+            opacity: 0.1,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+            e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.3)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+          }}
+        >
+          <span style={{ fontSize: "20px" }}>
+            {!musicStarted ? "🎵" : musicEnabled ? "🔇" : "🎵"}
+          </span>
+          <span>
+            {!musicStarted ? "Play Music" : musicEnabled ? "Mute" : "Unmute"}
+          </span>
+        </button>
+      </div>
+
       <div className={styles.mainContent}>
         <div className={styles.mazeContainer}>
           <svg
@@ -489,47 +756,65 @@ const MazePage: NextPage = () => {
             {/* Decorative balloons */}
             <g className={styles.floatingBalloon}>
               <ellipse
-                cx="50"
-                cy="50"
+                cx="150"
+                cy="300"
                 rx="25"
                 ry="30"
-                fill="#FF69B4"
+                fill="#32CD32"
                 opacity="0.7"
               />
               <line
-                x1="50"
-                y1="80"
-                x2="50"
-                y2="120"
+                x1="150"
+                y1="330"
+                x2="150"
+                y2="370"
                 stroke="#333"
                 strokeWidth="1"
               />
             </g>
             <g className={styles.floatingBalloon2}>
               <ellipse
-                cx="780"
-                cy="80"
+                cx="600"
+                cy="700"
                 rx="25"
                 ry="30"
-                fill="#FFD700"
+                fill="#FF6347"
                 opacity="0.7"
               />
               <line
-                x1="780"
-                y1="110"
-                x2="780"
-                y2="150"
+                x1="600"
+                y1="730"
+                x2="600"
+                y2="770"
                 stroke="#333"
                 strokeWidth="1"
               />
             </g>
             <g className={styles.floatingBalloon3}>
               <ellipse
-                cx="400"
-                cy="900"
+                cx="800"
+                cy="500"
                 rx="25"
                 ry="30"
-                fill="#00CED1"
+                fill="#9370DB"
+                opacity="0.7"
+              />
+              <line
+                x1="800"
+                y1="530"
+                x2="800"
+                y2="570"
+                stroke="#333"
+                strokeWidth="1"
+              />
+            </g>
+            <g className={styles.floatingBalloon4}>
+              <ellipse
+                cx="400"
+                cy="930"
+                rx="25"
+                ry="30"
+                fill="#32CD32"
                 opacity="0.7"
               />
               <line
@@ -602,22 +887,39 @@ const MazePage: NextPage = () => {
               </g>
             ))}
 
-            {/* Render Treasures as birthday cakes */}
-            {treasures.map((treasure) => (
-              <g key={treasure.id}>
-                <text
-                  x={treasure.x}
-                  y={treasure.y + 5}
-                  fontSize="24"
-                  textAnchor="middle"
-                  className={styles.bouncing}
-                  onMouseDown={(e) => handleTreasureMouseDown(e, treasure.id)}
-                  style={{ cursor: "grab", userSelect: "none" }}
-                >
-                  🎂
-                </text>
-              </g>
-            ))}
+            {/* Render Treasures with various icons (only if discovered) */}
+            {treasures.map((treasure) => {
+              const isDiscovered = discoveredTreasures.has(treasure.id);
+              return (
+                <g key={treasure.id}>
+                  {isDiscovered ? (
+                    <text
+                      x={treasure.x}
+                      y={treasure.y + 5}
+                      fontSize="24"
+                      textAnchor="middle"
+                      className={styles.bouncing}
+                      onMouseDown={(e) =>
+                        handleTreasureMouseDown(e, treasure.id)
+                      }
+                      style={{ cursor: "grab", userSelect: "none" }}
+                    >
+                      {treasure.icon}
+                    </text>
+                  ) : (
+                    // Show a subtle hint that something is here (optional)
+                    <circle
+                      cx={treasure.x}
+                      cy={treasure.y}
+                      r="3"
+                      fill="#FFB6C1"
+                      opacity="0.3"
+                      className={styles.pulsingHint}
+                    />
+                  )}
+                </g>
+              );
+            })}
 
             {newWall && (
               <rect
@@ -650,7 +952,8 @@ const MazePage: NextPage = () => {
         </div>
 
         <div className={styles.rightPanel}>
-          <div className={styles.controls}>
+          <>
+            {/* <div className={styles.controls}>
             <button onClick={handleReset} className={styles.resetButton}>
               🔄 Reset Game
             </button>
@@ -662,60 +965,132 @@ const MazePage: NextPage = () => {
             >
               {deleteMode ? "Edit Mode: ON" : "Edit Mode: OFF"}
             </button>
-          </div>
-
-          <div className={styles.photoContainer}>
-            <div className={styles.photoFrame}>
-              {nearbyTreasure ? (
-                <>
-                  <img
-                    src={nearbyTreasure.photo}
-                    alt="Birthday Memory"
-                    className={styles.treasureImage}
-                  />
-                  {collectedTreasures.some(
-                    (t) => t.id === nearbyTreasure.id
-                  ) && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "10px",
-                        right: "10px",
-                        background: "rgba(255, 255, 255, 0.9)",
-                        borderRadius: "50%",
-                        width: "40px",
-                        height: "40px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "24px",
-                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-                      }}
-                    >
-                      ✓
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className={styles.photoPlaceholder}>
-                  <span className={styles.placeholderEmoji}>📸</span>
-                  <p>Get close to a cake to preview memories!</p>
+          </div> */}
+            <div className={styles.photoContainer}>
+              <div className={styles.photoFrame}>
+                {nearbyTreasure ? (
+                  <>
+                    <img
+                      src={nearbyTreasure.photo}
+                      alt="Birthday Memory"
+                      className={styles.treasureImage}
+                    />
+                    {collectedTreasures.some(
+                      (t) => t.id === nearbyTreasure.id
+                    ) && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "10px",
+                          right: "10px",
+                          background: "rgba(255, 255, 255, 0.9)",
+                          borderRadius: "50%",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "24px",
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        ✓
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className={styles.photoPlaceholder}>
+                    <span className={styles.placeholderEmoji}>📸</span>
+                    <p>Get close to a treasure to preview memories!</p>
+                  </div>
+                )}
+              </div>
+              {nearbyTreasure && (
+                <div
+                  style={{
+                    marginTop: "15px",
+                    padding: "10px",
+                    backgroundColor: "#FFF0F5",
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    textAlign: "center",
+                  }}
+                >
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: "24px",
+                      color: "#FF1493",
+                      fontWeight: "500",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {(
+                      treasureData.find(
+                        (t) => t.id === nearbyTreasure.id
+                      ) as any
+                    )?.text || ""}
+                  </p>
+                </div>
+              )}
+              <div className={styles.collectionCounter}>
+                <span className={styles.counterEmoji}>🎁</span>
+                {discoveredTreasures.size} / {treasures.length} discovered
+              </div>
+              {allTreasuresFound && (
+                <div
+                  onClick={openModal}
+                  className={styles.treasureBoxContainer}
+                >
+                  <span
+                    className={`${styles.bouncing} ${styles.treasureBoxEmoji}`}
+                  >
+                    🎁
+                  </span>
+                  <p className={styles.treasureBoxText}>
+                    Click me for 回顾 more funny memories!
+                  </p>
                 </div>
               )}
             </div>
-            <div className={styles.collectionCounter}>
-              <span className={styles.counterEmoji}>🎁</span>
-              {collectedTreasures.length} / {treasures.length} memories
-              collected
-            </div>
-          </div>
-
-          <div className={styles.instructions}>
+            {/* <div className={styles.instructions}>
             Use <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> or{" "}
             <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to move
-          </div>
+          </div> */}
+          </>
         </div>
       </div>
+      {isModalOpen && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={closeModal}>
+              &times;
+            </button>
+            <button
+              className={styles.prevButton}
+              onClick={showPrevImage}
+              aria-label="Previous image"
+            >
+              &#10094;
+            </button>
+            <img
+              src={otherPics[currentImageIndex]}
+              alt={`Surprise image ${currentImageIndex + 1}`}
+              className={styles.modalImage}
+            />
+            <button
+              className={styles.nextButton}
+              onClick={showNextImage}
+              aria-label="Next image"
+            >
+              &#10095;
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
